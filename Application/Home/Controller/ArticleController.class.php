@@ -2,7 +2,7 @@
 namespace Home\Controller;
 use Think\Controller;
 class ArticleController extends Controller {
-   //主页
+   //主页 
    public function index(){    
       $p      = I('GET.p','1','intval');
       $title  = I('GET.title');
