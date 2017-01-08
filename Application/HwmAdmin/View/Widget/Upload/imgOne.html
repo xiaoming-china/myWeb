@@ -1,0 +1,35 @@
+<input type="text" id="url{$parameters['id']}" name="{$parameters['name']}" value="{$parameters['value']}" />
+<button class="button button-primary" type="button" id="pic{$parameters['id']}">选择图片</button>
+<if condition="$parameters['value']"><a href="javascript:show_pic()" title="预览" target="_blank"><i class="icon icon-search"></i></a></if>
+
+<script>
+  KindEditor.ready(function(K) {
+    var editor = K.editor({
+      allowFileManager : true,
+      uploadJson:"{:U('Upload/imgOne')}",
+      fileManagerJson : "{:U('Upload/fileManagerJson')}"
+    });
+    K("#pic{$parameters['id']}").click(function() {
+      editor.loadPlugin('image', function() {
+        editor.plugin.imageDialog({
+          imageUrl : K("#url{$parameters['id']}").val(),
+          clickFn : function(url, title, width, height, border, align) {
+            K("#url{$parameters['id']}").val(url);
+            editor.hideDialog();
+          }
+        });
+      });
+    });
+  });
+
+  function show_pic(){
+      layer.open({
+        title:'图片预览',
+        type: 1,
+        closeBtn: 1, //关闭按钮
+        anim: 2,
+        shadeClose: false, //遮罩关闭
+        content: '<div style="text-align:center;"><img src="'+$("#url{$parameters['id']}").val()+'"></div>'
+      });
+  }
+</script>

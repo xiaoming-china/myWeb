@@ -1,0 +1,19 @@
+<textarea name="{$parameters['name']}" id="contents{$parameters['id']}"">{$parameters['value']}</textarea>
+<script>
+  KindEditor.ready(function(K) {
+    var editor = K.create("#contents{$parameters['id']}", {
+      allowFileManager : true,
+      allowImageUpload : true,
+      uploadJson:"{:U('Upload/imgOne')}",
+      fileManagerJson : "{:U('Upload/fileManagerJson')}",
+      afterBlur: function () { this.sync(); },
+      allowPreviewEmoticons : false,
+      width:710,
+      height:310,
+      items : [
+        'source','fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+        'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+        'insertunorderedlist', '|', 'emoticons', 'image', 'link', 'preview','code','map','fullscreen']
+    });
+  });
+</script>

@@ -1,0 +1,51 @@
+<style type="text/css">
+	#J_imageView li{list-style-type:none;width: 200px;height: auto;overflow:hidden;float:left;margin-right:15px;margin-bottom:30px;}
+	#J_imageView li img{width:200px;height:200px;border: 1px solid #ccc;border-radius: 6px;}
+	#J_imageView li input{border-radius: 5px;}
+	#J_imageView li input.desc{margin-top: 10px;margin-right: 6px;width: 135px;}
+	#J_imageView li input.sort{width:15px;margin-top: 10px;margin-right:6px;text-align: center;}
+	#J_imageView li a i{position:relative;margin-top: 8px;}
+</style>
+<input class="button button-small" type="button" id="J_selectImage" value="批量上传图片" />
+<div id="J_imageView" style="margin:10px 0;height: auto;overflow: hidden;">
+	<!-- <volist name="parameters['data']" id="vo" key="k"> -->
+	<li class="li{$vo.room_id}{$k}">
+		<img src="{$vo.thumb_url}">
+		<input type="hidden" name="img[url][]" value="{$vo.thumb_url}" />
+		<input type="text" name="img[sort][]" value="{$vo.sort_order}" class="sort" />
+		<input type="text" name="img[desc][]" value="{$vo.img_desc}" class="desc" placeholder="描述"><a href="javascript:removeImg('.li{$vo.room_id}{$k}','{$vo.thumb_url}')"><i class="icon icon-trash"></i></a>
+	</li>
+	<!-- </volist> -->
+</div>
+
+<script>
+	var k=0;
+	KindEditor.ready(function(K) {
+		var editor = K.editor({
+			uploadJson:"{:U('Upload/imgOne')}",
+			allowFileManager : true
+		});
+		K('#J_selectImage').click(function() {
+			editor.loadPlugin('multiimage', function() {
+				editor.plugin.multiImageDialog({
+					clickFn : function(urlList) {
+						var div = K('#J_imageView');
+						var tmp = '';
+						K.each(urlList, function(i, data) {
+							k = k+1;
+							tmp = '<li class="li'+k+'"><img src="' + data.url + '"><input type="hidden" name="img[url][]" value="'+data.url+'" /><input type="text" name="img[sort][]" value="0" class="sort" /><input type="text" name="img[desc][]" class="desc" placeholder="描述"><a href="javascript:removeImg(\'.li'+k+'\',\''+data.url+'\')"><i class="icon icon-trash"></i></a></li>';
+							div.append(tmp);
+						});
+						editor.hideDialog();
+					}
+				});
+			});
+		});
+	});
+
+	function removeImg(k,imgUrl){
+		$.post("{:U('Upload/delImg')}",{imgUrl:imgUrl},function(rs){
+			$(k).remove();
+		});	
+	}
+</script>

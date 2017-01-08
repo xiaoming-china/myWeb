@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.html">
+    <title>后台登录</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/Public/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Public/Admin/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="/Public/Admin/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="/Public/Admin/css/style.css" rel="stylesheet">
+    <link href="/Public/Admin/css/style-responsive.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/Public/Admin/js/html5shiv.js"></script>
+    <script src="/Public/Admin/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+  <body class="login-body">
+    <div class="container">
+      <form class="form-signin" action="{:U('HwmAdmin/Public/login')}" method="post" id="login-form">
+        <h2 class="form-signin-heading">后台登录</h2>
+        <div class="login-wrap">
+            <input type="text" class="form-control" placeholder="账号" name="AdminName" autofocus>
+            <input type="password" class="form-control" placeholder="密码" name="AdminPass">
+            <button class="btn btn-lg btn-login btn-block" type="submit">登录</button>
+        </div>
+      </form>
+    </div>
+    <script src="/Public/Admin/js/jquery-1.8.3.min.js"></script>
+    <script src="/Public/Admin/js/bootstrap.min.js"></script>
+    <script src="/Public/Admin/js/jquery.validate.min.js"></script>
+    <script src="/Public/Admin/js/jQuery.Form.js"></script>
+    <script src="/Public/Admin/assets/layer/layer.js"></script>
+    <script src="/Public/Admin/js/hwm-basic.js"></script>
+
+    <script type="text/javascript">
+            //js验证及提交
+            var Script = function () {
+            $.validator.setDefaults({
+                submitHandler: function(form) {
+                  submitAfter();
+                  // form.submit();
+                  $(form).ajaxSubmit({
+                    dataType:"json",
+                    success:function(data){
+                       if(data.status =='success'){
+                          location.href = data.url;
+                       }else{
+                        layer.msg(data.info,{
+                          time: 1000
+                        });
+                        setTimeout(function() {
+                          submitBefter();
+                        }, 1000);
+                       }
+                      }
+                  }); 
+                }
+            });
+            $().ready(function() {
+                $("#login-form").validate({
+                  rules: {
+                     AdminName:{
+                      required:true,
+                      maxlength:15
+                     }, 
+                     AdminPass:{
+                      required:true,
+                      maxlength:15
+                     }
+                  },
+                   messages: {
+                     AdminName: {
+                      required:"请输入账号",
+                      maxlength:"不能大于15个字符"
+                     },
+                     AdminPass:{
+                      required:'请输入密码',
+                      maxlength:'不能大于15个字符'
+                     }
+                  }
+                });
+            });
+        }();
+        </script>
+
+
+  </body>
+</html>

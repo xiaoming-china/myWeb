@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.html">
+    <title>首页</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/Public/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <!--external css-->
+    <link href="/Public/Admin/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/Public/Home/css/animate.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/Public/Home/css/hwm-style.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/Public/Admin/js/html5shiv.js"></script>
+      <script src="/Public/Admin/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+<body>
+      <section id="container" class="">
+       <!--header start -->
+        <include file="Public/sidebar" />
+       <!--header end-->
+        <div class="container" style="margin-top: 80px;">
+
+          <div class="row">
+          <!--<foreach name="pList" item="v">-->
+             <div class="col-lg-3 phoneDetail" pId={$v['p_id']} islock="{$v['is_lock']}">
+               <div class="photo-list">
+                 <div class="cover">
+                 <!--<if condition="$v['is_lock'] eq 1" >-->
+                   <img src="/Public/Home/images/lock.png"/>
+                 <!--<else/>-->
+                   <img src="{$v['covour']}">
+                 <!--</if>-->
+                 </div>
+                 <div class="photo-fotter">
+                  <p>
+                    <e class="t-title">data:</e> {:date('Y-m-d',$v['add_time'])}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <e class="t-title">view:</e> {$v['p_view']}
+                  </p> 
+                  <p>
+                    <e class="t-title">num:</e> {$v['count']}&nbsp;&nbsp;&nbsp;
+                    <e class="t-title">title:</e>{$v['p_name']}
+                  </p>
+                 </div>
+               </div>
+             </div>
+          <!--</foreach>-->
+          </div>
+        </div>
+      </section>
+
+
+    <script src="/Public/Admin/js/jquery.js"></script>
+    <script src="/Public/Admin/js/jquery-1.8.3.min.js"></script>
+    <script src="/Public/Admin/js/bootstrap.min.js"></script>
+    <script src="/Public/Admin/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="/Public/Admin/assets/layer/layer.js"></script>
+    <script src="/Public/Home/js/hwm-basic.js"></script>
+
+    <script type="text/javascript">
+
+      $('.phoneDetail').click(function(){
+        var islock = $(this).attr('islock');
+        var pId    = $(this).attr('pId');
+        if(islock == 1){
+          layer.prompt({
+              formType: 1,
+              title: '请输入密码',
+              area: ['800px', '350px'] //自定义文本域宽高
+            }, function(value, index, elem){
+              $.post("{:U('Home/Photo/isTrue')}",{pass:value,pId:pId},function(rs){
+                  if(rs.status == 'success'){
+                    getList(value,pId);
+                  }else{
+                    layer.msg('密码错误');
+                  }
+              },'json');
+            });
+        }else{
+          var pass = '';
+          getList(pass,pId);
+        }
+      });
+      function getList(pass,pId){
+          $.post("{:U('Home/Photo/photoDetail')}",{pId:pId,pass:pass}, function(json){
+          layer.photos({
+            photos: json
+          });
+        },'json'); 
+      }
+    </script> 
+</body>
+
+</html>

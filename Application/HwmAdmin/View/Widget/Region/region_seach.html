@@ -1,0 +1,68 @@
+<label>地区：</label>
+<!-- <if condition="in_array(1,$parameters['select'])"> -->
+<select class="input-small" name="province" onchange="region(this,'province')">
+  <option value="0">不限</option>
+  <!-- <volist name="parameters['region']" id="vo"> -->
+  <option value="{$vo.region_id}" <if condition="$parameters['provinceId'] eq $vo['region_id']">selected</if>>{$vo.region_name}</option>
+  <!-- </volist> -->
+</select>
+<label>省</label>
+<!-- </if> -->
+
+<!-- <if condition="in_array(2,$parameters['select'])"> -->
+<select class="input-small" name="city" onchange="region(this,'city')">
+  <option value="0">不限</option>
+  <!-- <volist name="parameters['city']" id="vo"> -->
+  <option value="{$vo.region_id}" <if condition="$parameters['cityId'] eq $vo['region_id']">selected</if>>{$vo.region_name}</option>
+  <!-- </volist> -->
+</select>
+<label>市</label>
+<!-- </if> -->
+
+<!-- <if condition="in_array(3,$parameters['select'])"> -->
+<select class="input-small" name="district" onchange="region(this,'district')">
+  <option value="0">不限</option>
+  <!-- <volist name="parameters['district']" id="vo"> -->
+  <option value="{$vo.region_id}" <if condition="$parameters['districtId'] eq $vo['region_id']">selected</if>>{$vo.region_name}</option>
+  <!-- </volist> -->
+</select>
+<label>区</label>
+<!-- </if> -->
+
+<script type="text/javascript">
+  //地区数据
+  function region(obj,type){
+    var select = $(obj);
+    var parent_id = select.val();
+
+   if("{$parameters['school']}"==1){
+    if(select.attr('name')=='city'){
+      $.getJSON("{:U('School/getSchool')}/city/"+parent_id,{},function(rs){
+        var html = '<option value="0">不限</option>';
+        if(rs.length>0){
+           $.each(rs,function(k,v){
+            html += '<option value='+v.school_id+'>'+v.school_name+'</option>';
+          });
+        }
+        $('select[name=school]').html(html);
+      });
+    }
+   }
+
+    $.getJSON("{:U('System/getRegion')}/parent_id/"+parent_id,{},function(rs){
+      var html = '<option value="0">不限</option>';
+      if(type == 'province'){
+        $.each(rs,function(k,v){
+          html += '<option value='+v.region_id+'>'+v.region_name+'</option>';
+        });
+        $('select[name=city]').html(html);
+        $('select[name=district]').html('<option value="0">不限</option>');
+      }else if(type == 'city'){
+        $.each(rs,function(k,v){
+          html += '<option value='+v.region_id+'>'+v.region_name+'</option>';
+        });
+        $('select[name=district]').html(html);
+      }
+    });
+  }
+</script>

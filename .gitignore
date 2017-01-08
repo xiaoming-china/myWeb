@@ -1,0 +1,7 @@
+# IDE file
+*.tags
+*.tags_sorted_by_file
+/Cache
+/Cache
+
+

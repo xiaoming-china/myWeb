@@ -1,0 +1,133 @@
+<link href="/Public/Admin/css/bootstrap.min.css" rel="stylesheet">
+<link href="/Public/Admin/css/bootstrap-reset.css" rel="stylesheet">
+<link href="/Public/Admin/css/style.css" rel="stylesheet">
+ <link href="/Public/Admin/css/hwm-style.css" rel="stylesheet" />
+
+<style type="text/css">
+  .addType{
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  .addType input,.addType textarea,.addType select{
+    color: #01a89e;
+  }
+  </style>
+<div class="addType">
+        <form class="form-horizontal" role="form" id="addType" method="post">
+          <div class="form-group">
+            <label for="firstname" class="col-sm-2 control-label">名称</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="name" 
+                   placeholder="请输入名称" value="{$typeInfo['type_name']}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="firstname" class="col-sm-2 control-label">父级</label>
+            <div class="col-sm-10">
+              <select class="form-control" name="parent">
+                <option value="0">无</option>
+                <!--<foreach name="typeList" item="v">-->
+                  <option value="{$v['t_id']}" 
+                    <if condition="$v[t_id] eq $typeInfo['parent']">selected</if>>{$v['html']}{$v['type_name']}
+                  </option>
+                <!--</foreach>-->
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lastname" class="col-sm-2 control-label">描述</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" rows="3" placeholder="请输入描述" name="desc">{$typeInfo['type_desc']}</textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="firstname" class="col-sm-2 control-label">排序</label>
+            <div class="col-sm-3">
+              <input type="text" class="form-control" name="sort" value="{$typeInfo['type_sort']}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="firstname" class="col-sm-2 control-label">状态</label>
+            <div class="col-sm-10">
+              <label class="checkbox-inline">
+                <input type="radio" name="status" value="1" <if condition="$typeInfo['type_status'] eq 1">checked</if>>启用
+              </label>
+              <label class="checkbox-inline">
+                <input type="radio" name="status" value="0" <if condition="$typeInfo['type_status'] eq 0">checked</if>>禁用
+              </label> 
+            </div>
+          </div>
+          <div class="form-group" style="margin-top:20px;">
+            <label for="lastname" class="col-sm-2 control-label"></label>
+            <div class="col-sm-9">
+              <input type="hidden" name ="tId" value="{$_GET['id']}" />
+              <button class="btn btn-primary" type="submit" style="margin-right:30px;">编辑</button>
+              <button class="btn btn-primary" type="reset">重置</button>
+            </div>
+          </div>
+        </form>
+</div>
+
+
+<script src="/Public/Admin/js/jquery.js"></script>
+<script src="/Public/Admin/js/jquery-1.8.3.min.js"></script>
+<script src="/Public/Admin/js/bootstrap.min.js"></script>
+<script src="/Public/Admin/js/jquery.validate.min.js"></script>
+<script src="/Public/Admin/js/jQuery.Form.js"></script>
+<script src="/Public/Admin/assets/layer/layer.js"></script>
+<script type="text/javascript">
+  var Script = function () {
+    $.validator.setDefaults({
+        submitHandler: function(form) {
+          layer.load(1, {
+            shade: [0.1,'#fff'] //0.1透明度的白色背景
+          });
+          $(form).ajaxSubmit({
+            dataType:"json",
+            success:function(data){
+               if(data.status =='success'){
+                layer.msg(data.info,{
+                  time: 1500
+                }, function(){
+                  var index = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
+                  parent.layer.close(index); //执行框架关闭
+                  parent.location.href = data.url;//刷新父页面
+                });
+               }else{
+                 layer.alert(data.info);
+               }
+              }
+          }); 
+        }
+    });
+    $().ready(function() {
+        $("#addType").validate({
+          rules: {
+             name:{
+              required:true,
+              minlength:2,
+              maxlength:20
+             }, 
+             desc:{
+              required:true,
+              minlength:5,
+              maxlength:30
+             }, 
+          },
+           messages: {
+             name: {
+              required:"请输入名称",
+              minlength:"不能小于2个字符",
+              maxlength:"不能大于20个字符"
+             },
+             desc: {
+              required:"请输入描述",
+              minlength:"不能小于5个字符",
+              maxlength:"不能大于30个字符"
+             }
+          }
+        });
+    });
+}();
+</script>

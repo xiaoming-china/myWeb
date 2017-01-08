@@ -1,0 +1,46 @@
+
+<select class="input-small" name="city" onchange="region(this,'city')">
+  <option value="0">请选择</option>
+  <!-- <volist name="parameters['city']" id="vo"> -->
+  <option value="{$vo.city_id}" <if condition="$parameters['city_id'] eq $vo['city_id']">selected</if>>{$vo.city_name}</option>
+  <!-- </volist> -->
+</select>
+   
+
+<script type="text/javascript">
+  //地区数据
+  function region(obj,type){
+    var select = $(obj);
+    var parent_id = select.val();
+
+    //根据城市选学校
+    if("{$parameters['school']}"==1){
+      if(select.attr('name')=='city'){
+        $.getJSON("{:U('School/getSchool')}/city/"+parent_id,{},function(rs){
+          var html = '<option value="0">请选择</option>';
+          if(rs.length>0){
+             $.each(rs,function(k,v){
+              html += '<option value='+v.school_id+'>'+v.school_name+'</option>';
+            });
+          }
+          $('select[name=school]').html(html);
+        });
+      }
+    }
+
+    //根据城市选公寓
+    if("{$parameters['building']}"==1){
+      if(select.attr('name')=='city'){
+        $.getJSON("{:U('Room/city_building')}/city/"+parent_id,{},function(rs){
+          var html = '<option value="0">请选择</option>';
+          if(rs.length>0){
+             $.each(rs,function(k,v){
+              html += '<option value='+v.b_id+'>'+v.b_name+'</option>';
+            });
+          }
+          $('select[name=b_id]').html(html);
+        });
+      }
+    }
+  }
+</script>

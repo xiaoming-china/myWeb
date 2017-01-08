@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.html">
+    <title>文章管理</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/Public/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Public/Admin/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="/Public/Admin/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/Public/Admin/css/owl.carousel.css" type="text/css">
+    <!-- Custom styles for this template -->
+    <link href="/Public/Admin/css/style.css" rel="stylesheet">
+    <link href="/Public/Admin/css/style-responsive.css" rel="stylesheet" />
+    <!--my style-->
+    <link href="/Public/Admin/css/hwm-style.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/Public/Admin/js/html5shiv.js"></script>
+      <script src="/Public/Admin/js/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        .follower img{
+          width: 100%;
+          height: 100%;
+          border-radius: 0;
+        }
+        .list{
+          height: 350px;
+        }
+    </style>
+  </head>
+
+  <body>
+  <section id="container" class="">
+    <!--header start -->
+      <include file="Public/sidebar" />
+   <!--header end-->
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+              <!--search start-->
+              <div class="admin-list-header">
+               <form class="form-horizontal" role="form" action="?" method="get">
+                  <div class="btn-group pull-left">
+                    <a href="{:U('/HwmAdmin/Article/articleAdd')}" class="btn btn-warning">添加</a>
+                    <a href="#" class="btn btn-info checkAll">全选</a>
+                    <a href="#" class="btn btn-danger" onclick='checkAfter("{:U(\"HwmAdmin/Article/delArticle\")}","确定全部删除吗？")'>删除</a>
+                    <!--<button type="button" class="btn btn-warning" onclick="checkAfter('selectId','确定全部锁定吗？',test)">锁定</button> -->
+                  </div>
+                  <div class="pull-left list-search">
+                    <label>标题</label>
+                    <input type="text" class="search-text" name="title">
+                    <label>分类</label>
+                    <select class="search-text" name="type">
+                      <option value="">全部</option>
+                      <!--<foreach name="typeList" item="v">-->
+                      <option value="{$v['t_id']}" <if condition="$_GET['type'] eq $v['t_id']">selected</if>>{$v['html']}{$v['type_name']}</option>
+                      <!--</foreach>-->
+                      
+                    </select>
+                    <label>锁定</label>
+                    <select class="search-text" name="status">
+                      <option value="">正常</option>
+                      <option value="1">是</option>
+                      <option value="0">否</option>
+                    </select>
+                    <button type="submit" class="btn btn-info search-btn">搜索</button>
+                  </div>
+                </form>
+              </div>
+              <!--search end-->
+              {:emptyListTemplate($articleList)}
+            <!--<foreach name="articleList" item="v">-->
+              <div class="admin-list">
+                  <section class="panel list">
+                      <div class="follower">
+                          <div class="panel-body" style="padding: 0;">
+                              <img src="{$v['thumb_img']}" alt="">
+                          </div>
+                      </div>
+                      <div class="panel-content">
+                       <p>
+                          <span><e class="t-title">data:</e> 
+                            {:date("Y-m-d H:i:s",$v['add_time'])}
+                          </span> 
+                        </p> 
+                        <p><e class="t-title">title:</e>{$v['title']}</p>
+                      </div>
+                      <footer class="follower-foot">
+                          <ul>
+                          <switch name="v['status']">
+                              <case value="0">
+                                <a href="javascript:onlyHandle('{:U('/HwmAdmin/Article/chageStatus')}',{$v['a_id']},'确定解锁此文章吗？')">
+                                   <li class="icon-li icon-lock" title="点击解锁"></li>
+                                </a>
+                              </case>
+                              <case value="1">
+                                <a href="javascript:onlyHandle('{:U('/HwmAdmin/Article/chageStatus')}',{$v['a_id']},'确定锁定此文章吗？')">
+                                   <li class="icon-li icon-unlock" title="点击锁定"></li>
+                                </a>
+                              </case>
+                            </switch>
+                            <a href="{:U('/HwmAdmin/Article/articleEdit',array('id'=>$v['a_id']))}">
+                              <li class="icon-li icon-pencil" title="编辑" style="border-left: none;"></li>
+                            </a>
+                            <a href="javascript:void(0);">
+                              <li class="icon-li icon-eye-open" title="查看" style="border-left: none;"></li>
+                            </a>
+                            <a href="javascript:onlyHandle('{:U('/HwmAdmin/Article/delArticle')}',{$v['a_id']},'确定删除此数据吗？')">
+                                  <li class="icon-li icon-trash" title="删除" style="border-left: none;">
+                              </li>
+                            </a>
+                            <a href="javascript:void(0);">
+                              <li class="icon-li icon-ok select-list" title="选择" style="border-left: none;">
+                                  <input type="checkbox" name="selectId" value="{$v['a_id']}"/>
+                              </li>
+                            </a>
+                          </ul>
+                      </footer>
+                  </section>
+              </div>
+            <!--</foreach>-->
+                 
+          </section>
+          <!--page-->
+              <div class="row page">
+                  <div class="col-sm-6">
+                    {$page_show}
+                  </div>
+              </div>
+      </section>
+      <!--main content end-->
+  </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="/Public/Admin/js/jquery.js"></script>
+    <script src="/Public/Admin/js/jquery-1.8.3.min.js"></script>
+    <script src="/Public/Admin/js/bootstrap.min.js"></script>
+    <script src="/Public/Admin/js/jquery.scrollTo.min.js"></script>
+    <script src="/Public/Admin/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <!--common script for all pages-->
+    <script src="/Public/Admin/js/common-scripts.js"></script>
+    <script src="/Public/Admin/assets/layer/layer.js"></script>
+
+    <script src="/Public/Admin/js/hwm-basic.js"></script>
+
+    <script type="text/javascript">
+      //单选
+      $('.select-list').click(function(){
+        var select = $(this).find("input[type='checkbox']");
+        if(!select.is(":checked")){
+          $(this).find('[name = selectId]:checkbox').attr("checked", true);
+          var html = '';
+          html = '<div class="follower-select"><i class="icon-ok follower-ok"></i></div>';
+          $(this).append(html);
+        }else{
+          $(this).find('[name = selectId]:checkbox').attr("checked", false);
+          $(this).find('.follower-select').remove();
+        }
+      });
+      //全选
+      $('.checkAll').click(function() {
+        var text = $(this).text();
+        if(text == '全选'){
+          $(this).text('取消');
+          $("input[name='selectId']").each(function() {
+            if(!$(this).is(":checked")){
+              var html = '';
+              html = '<div class="follower-select"><i class="icon-ok follower-ok"></i></div>';
+              $(this).parent('.select-list').append(html);
+              $(this).attr("checked", true); 
+            } 
+          });
+        }else{
+          $(this).text('全选');
+          $("input[name='selectId']").each(function() {
+             $(this).siblings('.follower-select').remove();
+             $(this).attr("checked", false); 
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

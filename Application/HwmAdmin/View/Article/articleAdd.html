@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.html">
+    <title>发布文章</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/Public/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Public/Admin/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="/Public/Admin/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="/Public/Admin/css/style.css" rel="stylesheet">
+    <link href="/Public/Admin/css/style-responsive.css" rel="stylesheet" />
+    <link href="/Public/Admin/tools/kindeditor/themes/default/default.css" rel="stylesheet"/>
+    <!--my style-->
+    <link href="/Public/Admin/css/hwm-style.css" rel="stylesheet" />
+    <script src="/Public/Admin/tools/kindeditor/kindeditor-all-min.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/Public/Admin/js/html5shiv.js"></script>
+      <script src="/Public/Admin/js/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+      .type-list input{
+        width: 40px;
+      }
+      input[type="radio"]{
+        vertical-align: -2px;
+      }
+      .new-group{
+        border-bottom: none !important;
+      }
+      .send-btn{
+        margin-top: 25px;
+        margin-left: 220px;
+      }
+      .send-btn div{
+        float: left;
+        margin-right: 50px;
+      }
+      input,textarea,select{
+        color: #000 !important;
+      }
+      textarea{
+        resize: none;
+      }
+      .control-label{
+        text-align: center !important;
+      }
+      .send-title{
+        background: #18b2a6;
+        color:#fff;
+      }
+      .tab .tab-titile-list{
+        float: left;
+        padding: 10px 10px 10px 10px;
+      }
+      .tab .tab-active{
+        background:#fff;
+      }
+      .tab-content{
+        padding-top: 20px;
+        background: #fff;
+        padding-bottom: 20px;
+      }
+      .show{
+        display: block !important;
+      }
+      .hidden{
+        display: none !important;
+      }
+    </style>
+  </head>
+
+<body>
+  <section id="container" class="">
+    <!--header start -->
+    <include file="Public/sidebar" />
+    <!--header end-->
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+            <div class="row">
+                  <div class="col-lg-12">
+                      <section class="panel">
+                          <header class="panel-heading send-title">发布文章</header>
+                          <ul class="tab">
+                            <li class="tab-titile-list tab-active">
+                              <a href="javascript:void(0);">基本信息</a>
+                            </li>
+                            <li class="tab-titile-list">
+                              <a href="javascript:void(0);">详情描述</a>
+                            </li>
+                          </ul>
+                      </section>
+                  </div>
+              </div>
+              <!--选项-->
+              <div class="tab-content" id="tab-content">
+                <form role="form" class="form-horizontal" method="post" id="addArticle">
+                  <!--基本信息-->
+                  <div>
+                      <div class="tab-content-list">
+                        <div class="form-group new-group">
+                            <label class="col-sm-1 control-label">
+                               <span class="must-info">*</span> 
+                               标题
+                            </label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" name="title"/>
+                            </div>
+                        </div>
+                        <div class="form-group new-group">
+                            <label class="col-sm-1 control-label">关键字</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" name="keyword" />
+                                <span class="help-block">多个请用,号隔开,最多8个字符</span>
+                            </div>
+                        </div>
+                        <div class="form-group new-group">
+                            <label class="col-sm-1 control-label">tag标签</label>
+                            <div class="col-sm-4">
+                                <input class="form-control" type="text" name="tags" />
+                                <span class="help-block">多个请用,号隔开,最多8个字符</span>
+                            </div>
+                        </div>
+                        <div class="form-group new-group">
+                            <label class="col-sm-1 control-label">
+                              <span class="must-info">*</span> 
+                              描述
+                            </label>
+                            <div class="col-sm-4">
+                                <textarea class="form-control" name="desc" rows="4"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group new-group">
+                            <label class="col-sm-1 control-label">
+                               <span class="must-info">*</span> 
+                               分类
+                            </label>
+                            <div class="col-sm-11">
+                              <div class="col-sm-2" style="padding-left: 0;">
+                                 <select class="form-control articleType" name="articleType">
+                                   <option value="">请选择分类</option>
+                                   <!--<foreach name="typeList" item="v">-->
+                                   <option value="{$v['t_id']}"> {$v['html']}{$v['type_name']}
+                                   </option>
+                                   <!--</foreach>-->
+                                 </select>
+                                 <div class="select-list pull-left"></div>
+                               </div>
+                            </div>
+                        </div>
+                        <div class="form-group new-group">
+                            <label class="col-sm-1 control-label">缩略图</label>
+                            <div class="col-sm-4">
+                                {:W('Upload/imgOne',array(array('name'=>'article_thumb','value'=>'/Public/Admin/img/default-head.jpg','id'=>1)))}
+                            </div>
+                        </div>
+                        <div class="form-group new-group">
+                            <label class="col-sm-1 control-label">状态</label>
+                            <div class="col-sm-4">
+                                <label class="checkbox-inline">
+                                  <input type="radio" name="status" checked> 开启
+                                </label>
+                                <label class="checkbox-inline">
+                                  <input type="radio" name="status" > 锁定
+                                </label>
+                            </div>
+                        </div>
+                        </div>
+                        <!--描述-->
+                        <div class="tab-content-list">
+                          <div class="form-group new-group">
+                            <label class="col-sm-1 control-label">
+                               <span class="must-info">*</span> 
+                               内容
+                            </label>
+                            <div class="col-sm-10">
+                                {:W('Upload/editor',array(array('name'=>'articleContent')))}
+                            </div>
+                          </div>
+                        </div>
+                         <!--按钮-->
+                        <div class="form-group new-group">
+                          <div class="center-block send-btn">
+                             <div><button type="submit" class="btn btn-info">发布</button></div>
+                             <div><button type="reset" class="btn btn-warning">重置</button></div>
+                             <div><button class="btn btn-danger">取消</button></div>
+                          </div>
+                        </div>
+                    </div>
+                </form>
+              </div>
+              <!--选项-->
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="/Public/Admin/js/jquery-1.8.3.min.js"></script>
+    <script src="/Public/Admin/js/bootstrap.min.js"></script>
+    <script src="/Public/Admin/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <!--common script for all pages-->
+    <script src="/Public/Admin/js/common-scripts.js"></script>
+    <script src="/Public/Admin/assets/layer/layer.js"></script>
+    <script src="/Public/Admin/js/jquery.validate.min.js"></script>
+    <script src="/Public/Admin/js/jQuery.Form.js"></script>
+    <script src="/Public/Admin/js/hwm-basic.js"></script>
+
+
+
+<script type="text/javascript">
+//js验证及提交
+  var Script = function () {
+    $.validator.setDefaults({
+        submitHandler: function(form) {
+          layer.load(1, {
+            shade: [0.1,'#fff'] //0.1透明度的白色背景
+          });
+          $(form).ajaxSubmit({
+            dataType:"json",
+            success:function(data){
+               if(data.status =='success'){
+                layer.msg(data.info,{
+                  time: 1500
+                }, function(){location.href = data.url;
+                });
+               }else{
+                 layer.alert(data.info);
+               }
+              }
+          }); 
+        }
+    });
+    $().ready(function() {
+        $("#addArticle").validate({
+          ignore: [],
+          rules: {
+             title:{
+              required:true,
+              minlength:2,
+              maxlength:20
+             }, 
+             desc:{
+              required:true,
+              maxlength:200
+             },
+             articleType:{
+              required:true
+             },
+             articleContent:{
+              required:true
+             }
+          },
+           messages: {
+             title: {
+              required:"请输入名称",
+              minlength:"不能小于2个字符",
+              maxlength:"不能大于20个字符"
+             },
+             desc:{
+              required:'请输入描述',
+              maxlength:'不能大于200个字符'
+             },
+             articleType: {
+              required:"请选择分类"
+             },
+            articleContent: {
+              required:"请输入内容"
+             }
+          }
+        });
+    });
+}();
+</script>
+<script type="text/javascript">
+    //必需js操作
+    //选择文章分类
+    $('.articleType').change(function() {
+      var type_val  = $(this).val();
+      var type_text = $(this).find('option:selected').text();
+      var selectList = $('.select-list').find('#type'+type_val);
+      if(type_val != ""){
+        if(selectList.length > 0){
+          return false;
+        }else{
+          var html = '';
+          html += "<span id='type"+type_val+"'>";
+          html += "<input type='hidden' name='typeNumber[]' value='"+type_val+"'/>";
+          html += "<a href='#'>"+type_text+"</a>";
+          html += "<i class='icon-remove remove-type' data-type='"+type_val+"'title='删除分类'></i></span>";
+          $('.select-list').append(html);
+        }
+      }
+    });
+    //移除分类
+    $(document).on('click', '.remove-type', function() {
+      var type_val = $(this).attr('data-type');
+      $('#type'+type_val).remove();
+    });
+    //tab选项卡
+    $(document).ready(function() {
+      $('.tab-content-list').eq(0).show().siblings('.tab-content-list').hide();
+    });
+    $('.tab > li').click(function() {
+      $(this).addClass('tab-active').siblings().removeClass('tab-active');
+      $('.tab-content-list').hide();
+      $('.tab-content-list').eq($(this).index()).show();
+    });
+</script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+

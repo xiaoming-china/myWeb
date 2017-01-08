@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.html">
+    <title>文章详情</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/Public/Admin/css/bootstrap.min.css" rel="stylesheet">
+    <!--external css-->
+    <link href="/Public/Admin/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/Public/Home/css/animate.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/Public/Home/css/hwm-style.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/Public/Admin/js/html5shiv.js"></script>
+      <script src="/Public/Admin/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+  <section id="container" class="">
+       <!--header start	-->
+		<include file="Public/sidebar" />
+       <!--header end-->
+
+      <!--main content start-->
+      <!-- <section id="main-content"> -->
+          <!-- <section class="wrapper"> -->
+            <!--state overview start-->
+            	<div class="container" style="margin-top: 80px;">
+            		<div class="row">
+				        <div class="col-md-4 test" id="index-left">
+				            <div class="panel panel-default index-left-item visible-lg" id="navbar-wrapper" style="border: none;">
+							    <div class="panel-body">
+							      <div class="search-box">
+							        <div class="search">
+							        	 <label><input type="text" name="keyword"></label>
+							        </div>
+							      </div>
+									<div class="type-list">
+							        	<!--列表开始-->
+							        	<div>
+								        	<a href="#" class="item-list on">
+								        		<div class="item-list-partent">后端</div>
+								        	</a>
+								        	<div class="item-list-sub">
+								        		<a href="">php</a>
+								        		<a href="">java</a>
+								        	</div>
+							        	</div>
+							        	<div>
+								        	<a href="#" class="item-list">
+								        		<div class="item-list-partent">前端</div>
+								        	</a>
+								        	<div class="item-list-sub">
+								        		<a href="">css</a>
+								        		<a href="">html</a>
+								        		<a href="">js</a>
+								        	</div>
+							        	</div>
+							        	<div>
+								        	<a href="#" class="item-list">
+								        		<div class="item-list-partent">其它</div>
+								        	</a>
+								        	<div class="item-list-sub">
+								        		<a href="">c</a>
+								        		<a href="">c#</a>
+								        		<a href="">c++</a>
+								        	</div>
+							        	</div>
+							        </div> 
+							    </div>
+							</div>
+							<div class="panel panel-default index-left-item visible-lg">
+							    <div class="panel-heading hot-heading">
+							        <h3 class="panel-title">热门内容</h3>
+							    </div>
+							    <div class="panel-body hot-list">
+							    <p>
+							      <a href="#" class=""><span>1</span>热门内容热门内容热门内容热门内容</a>
+							    </p>
+							    <p>
+							      <a href="#" class=""><span>2</span>热门内容热门内容热门内容热门内容</a>
+							    </p>
+							    <p>
+							      <a href="#" class=""><span>3</span>热门内容热门内容热门内容热门内容</a>
+							    </p>
+							    <p>
+							      <a href="#" class=""><span>4</span>热门内容热门内容热门内容热门内容</a>
+							    </p>
+							    <p>
+							      <a href="#" class=""><span>5</span>热门内容热门内容热门内容热门内容</a>
+							    </p>
+							    <p>
+							      <a href="#" class=""><span>6</span>热门内容热门内容热门内容热门内容</a>
+							    </p>
+							    <p>
+							      <a href="#" class=""><span>7</span>热门内容热门内容热门内容热门内容</a>
+							    </p>
+							    <p>
+							      <a href="#" class=""><span>8</span>热门内容热门内容热门内容热门内容</a>
+							    </p>
+							    <p>
+							      <a href="#" class=""><span>9</span>热门内容热门内容热门内容热门内容</a>
+							    </p>
+							    <p>
+							      <a href="#" class=""><span>10</span>热门内容热门内容热门内容热门内容</a>
+							    </p>
+							    </div>
+							</div>
+							<div class="panel panel-default index-left-item visible-lg">
+							    <div class="panel-body">
+							        <div class="tag-list">
+							          <e>标签：</e>
+							          <div class="tag-item">
+							            <span class="label label-default">默认</span>
+										<span class="label label-primary">主标签</span>
+										<span class="label label-success">成功标签</span>
+										<span class="label label-info">标签</span>
+										<span class="label label-default">默认</span>
+										<span class="label label-primary">主标签</span>
+										<span class="label label-success">成功标签</span>
+										<span class="label label-info">标签</span>
+										<span class="label label-default">默认</span>
+										<span class="label label-primary">主标签</span>
+										<span class="label label-success">成功标签</span>
+										<span class="label label-info">标签</span>
+							          </div>
+							        </div>
+							    </div>
+							</div>
+				        </div>
+				        <div class="col-md-8">
+				            <div class="panel panel-default index-right-item">
+							    <div class="panel-heading article-list-title">
+									<h4 class="panel-title article-title">
+									{$aInfo['title']}
+									</h4>
+									<div class="article-centent-fotter">
+
+								  <span class="article-list-footer-info pull-right">
+								    <i class="icon-comments-alt"></i> {$aInfo['commout_num']}
+								  </span>
+								  <span class="article-list-footer-info pull-right">
+								    <i class="icon-eye-open"></i> {$aInfo['view_num']}
+								  </span>
+								  <span class="article-list-footer-info pull-right">
+								    <i class="icon-calendar"></i> 
+								    {:date('Y-m-d H:i:s',$aInfo['add_time'])}
+								   </span>
+									</div>
+								</div>
+								<div class="panel-body article-content">
+								   <p>{$aInfo['contents']}</p>
+								</div>
+								<!--评论开始-->
+								<div class="hr"></div>
+								<div class="article-content-comment">
+									<h3>评论：</h3>
+									<div class="add-comment-box">
+									  <div class="textarea-box">
+									  	<textarea name="content"></textarea>
+									  </div>
+									  <div class="add-file">
+									  	<span class="icon-smile file-left emjoy">
+										  <!--表情开始-->
+										  	
+										  <!--表情结束-->
+									  	</span>
+										<!-- <span class="icon-picture pull-left file-left"></span> -->
+										<span class="pull-right">
+										  <button type="button" class="btn btn-info">评论</button>
+										</span>
+									  </div>
+									  
+									</div>
+									<div class="clearfix"></div>
+									<div class="comment-main-box">
+										<div class="comment-box">
+											<div class="comment-user">
+											  <div class="user-photo">
+											  	<img src="/Public/Admin/img/follower-avatar.jpg">
+											  </div>
+											  <div class="user-name">
+											  	<p class="name">她们都叫我小明</p>
+											  	<p class="data">1分钟前</p>
+											  </div>
+											</div>
+											<div class="comment-info">可是不引入BOOTSTRAP，却是正常显示因为使用的BOOTSTRAP，使用htmlspecialchars_decode对文章进行显示的时候，段落首行只缩进两个空格（一个中文字符）</div>
+											<div class="pull-right comment-fotter">
+												<span class="article-reply">回复</span>
+												<span class="icon-thumbs-up"> 100</span>
+												<span class="icon-thumbs-down"> 83</span>
+											</div>
+											<!--回复开始-->
+											<div class="comment-reply-box">
+												<div class="comment-user">
+											  <div class="user-photo">
+											  	<img src="/Public/Admin/img/follower-avatar.jpg">
+											  </div>
+											  <div class="user-name">
+											  	<p class="name">她们都叫我小明</p>
+											  	<p class="data">1分钟前</p>
+											  </div>
+											</div>
+											<div class="comment-info">可是不引入BOOTSTRAP，却是正常显示因为使用的BOOTSTRAP，使用htmlspecialchars_decode对文章进行显示的时候，段落首行只缩进两个空格（一个中文字符）</div>
+											</div>
+											<div class="comment-reply-box">
+												<div class="comment-user">
+											  <div class="user-photo">
+											  	<img src="/Public/Admin/img/follower-avatar.jpg">
+											  </div>
+											  <div class="user-name">
+											  	<p class="name">她们都叫我小明</p>
+											  	<p class="data">1分钟前</p>
+											  </div>
+											</div>
+											<div class="comment-info">可是不引入BOOTSTRAP，却是正常显示因为使用的BOOTSTRAP，使用htmlspecialchars_decode对文章进行显示的时候，段落首行只缩进两个空格（一个中文字符）</div>
+											</div>
+											<!--回复结束-->
+
+											<!--回复框-->
+
+											<!--回复框-->
+
+										</div>
+										<div class="hr"></div>
+										<div class="comment-box">
+											<div class="comment-user">
+											  <div class="user-photo">
+											  	<img src="/Public/Admin/img/follower-avatar.jpg">
+											  </div>
+											  <div class="user-name">
+											  	<p class="name">她们都叫我小明</p>
+											  	<p class="data">1分钟前</p>
+											  </div>
+											</div>
+											<div class="comment-info">可是不引入BOOTSTRAP，却是正常显示因为使用的BOOTSTRAP，使用htmlspecialchars_decode对文章进行显示的时候，段落首行只缩进两个空格（一个中文字符）</div>
+											<div class="pull-right comment-fotter">
+												<span class="article-reply">回复</span>
+												<span class="icon-thumbs-up"> 100</span>
+												<span class="icon-thumbs-down"> 83</span>
+											</div>
+										</div>
+										<div class="hr"></div>
+										<div class="comment-box">
+											<div class="comment-user">
+											  <div class="user-photo">
+											  	<img src="/Public/Admin/img/follower-avatar.jpg">
+											  </div>
+											  <div class="user-name">
+											  	<p class="name">她们都叫我小明</p>
+											  	<p class="data">1分钟前</p>
+											  </div>
+											</div>
+											<div class="comment-info">可是不引入BOOTSTRAP，却是正常显示因为使用的BOOTSTRAP，使用htmlspecialchars_decode对文章进行显示的时候，段落首行只缩进两个空格（一个中文字符）</div>
+											<div class="pull-right comment-fotter">
+												<span class="article-reply">回复</span>
+												<span class="icon-thumbs-up"> 100</span>
+												<span class="icon-thumbs-down"> 83</span>
+											</div>
+										</div>
+										<div class="hr"></div>
+									</div>
+							    </div>
+							    <!--评论结束-->
+							</div>
+							
+						
+				        </div>
+				    </div>
+    			</div>
+            <!--state overview end-->
+         <!--  </section> -->
+      <!-- </section> -->
+      <!--main content end-->
+  </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="/Public/Admin/js/jquery.js"></script>
+    <script src="/Public/Admin/js/jquery-1.8.3.min.js"></script>
+    <script src="/Public/Admin/js/bootstrap.min.js"></script>
+    <script src="/Public/Admin/js/jquery.nicescroll.js" type="text/javascript"></script>
+ 	<script src="/Public/Home/js/hwm-basic.js"></script>
+  
+
+    <script type="text/javascript">
+    
+    </script>
+    
+    
+          
+
+
+<div class="container-fluid index-fotter visible-lg">
+	Copyright © 2013-2016 意随心  myWeb.com All Rights Reserved. 备案号：闽ICP备15012807号-1
+</div>   
+
+  </body>
+</html>
