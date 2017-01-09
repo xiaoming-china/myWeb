@@ -17,6 +17,16 @@
       <script src="/Public/Admin/js/html5shiv.js"></script>
       <script src="/Public/Admin/js/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+        .layui-layer-imgbar{
+          display: inherit !important;
+        }
+        .layui-layer-imguide{
+          display: inherit !important;
+        }
+
+
+    </style>
   </head>
 
 <body>
@@ -54,6 +64,14 @@
         </div>
       </section>
 
+      <!--相册图片列表开始-->
+       <div id = "photo-list">
+          
+
+       </div>
+
+      <!--相册图片列表结束-->
+
 
     <script src="/Public/Admin/js/jquery.js"></script>
     <script src="/Public/Admin/js/jquery-1.8.3.min.js"></script>
@@ -75,6 +93,7 @@
             }, function(value, index, elem){
               $.post("{:U('Home/Photo/isTrue')}",{pass:value,pId:pId},function(rs){
                   if(rs.status == 'success'){
+                    layer.closeAll();//打开相册前关闭所有层
                     getList(value,pId);
                   }else{
                     layer.msg('密码错误');
