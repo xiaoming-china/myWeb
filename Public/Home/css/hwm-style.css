@@ -1,8 +1,9 @@
 body{
-	font: 14px/1.5 "Helvetica neue",Helvetica,Tahoma,"lantinghei sc","Microsoft Yahei",sans-serif;
-    color: #515250 !important;
+    background-color: #eef1eb;
+    font: 14px/1.5 "Helvetica neue",Helvetica,Tahoma,"lantinghei sc","Microsoft Yahei",sans-serif;
+    color: #515250;
     -webkit-font-smoothing: antialiased;
-    background-color: #f5f5f5;
+    -webkit-backface-visibility: hidden; 
 }
 li{
 	list-style: none;
@@ -463,9 +464,17 @@ img{
 	margin-top: 10px;
 	margin-bottom: 40px;
 	padding: 10px 10px;
-	text-indent: 25px;
 }
-
+.about-contant .desc h6{
+	font-size: 20px;
+	font-weight: 400;
+	color: #383937;
+}
+.about-contant .desc p{
+	line-height: 24px;
+	margin: 10px 0;
+	text-indent: 24px;
+}
 /*关于结束*/
 
 
