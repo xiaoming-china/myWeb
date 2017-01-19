@@ -34,6 +34,7 @@ class IndexController extends Controller {
       }
       //获取中间表的文章id
       $aIds = D('HwmAdmin/ArticleRelation')->getArticleId($where);
+      $aId = '';
       foreach ($aIds as $key => $value) {
         $aId .= $value['a_id'].',';
       }
