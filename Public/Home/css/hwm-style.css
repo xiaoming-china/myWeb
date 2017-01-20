@@ -275,7 +275,6 @@ img{
 .article-content-comment{
 	position: relative;
 	margin: 15px 15px;
-	background: #fff;
 	z-index: 1;
 }
 .list-title{
@@ -344,6 +343,7 @@ img{
 	border-radius: 10px;
 	height: 100px;
 	position: relative;
+	background: #fff;
 }
 .add-comment-box .textarea-box textarea{
 	width: 100%;
@@ -357,6 +357,7 @@ img{
     resize: none;
     line-height: normal;
     text-align: left;
+    padding: 5px 10px; 
 }
 .add-comment-box .add-file{
 	height: 40px;
@@ -436,6 +437,7 @@ img{
 	width:100%;
 	height:130px;
 	cursor: pointer;
+	background: #fff;
 }
 .message-list:hover{
 	color: #18b2a6;
