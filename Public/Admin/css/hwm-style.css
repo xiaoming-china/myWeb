@@ -32,6 +32,7 @@ li{
 }
 .admin-list{
 	width: 255px;
+	height: 350px;
 	float: left;
 	margin-left: 30px;
 	position: relative;
@@ -123,7 +124,11 @@ li{
     height: 31px;
 }
 .follower{
+	height: 230px;
 	position: relative;
+}
+.follower .panel-body{
+	height: 230px;
 }
 .follower-select{
 	position: absolute;
