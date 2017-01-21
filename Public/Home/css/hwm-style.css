@@ -124,6 +124,7 @@ img{
 }*/
 .index-left-item .type-list{
 	margin-top: 20px;
+	font-size: small;
 }
 .index-left-item .type-list .item-list{
 	display: block;
@@ -162,6 +163,7 @@ img{
 }
 .hot-list{
 	padding:10px 10px;
+	font-size: small !important;
 }
 .hot-list p a{
 	color: #666;
@@ -196,6 +198,10 @@ img{
 	margin-right: 10px;
 	border-bottom: 1px solid #ddd !important;
 }
+.article-list-title .panel-title{
+	color: #666 !important;
+	font-size: small !important;
+}
 .article-list-title a:hover{
 	color: #18b2a6;
 }
@@ -204,17 +210,23 @@ img{
 	padding: 10px 10px;
 	text-indent:2em !important;
 	line-height: 28px;
+	font-size: smaller;
+	color: #666;
 }
+/*.article-list-content img{
+	width: 100%;
+	height: auto;
+}*/
 .article-list-content a{
-	color: #333;
+	color: #666;
 }
 .article-list-content a:hover{
 	color: #18b2a6;
 }
 .article-list-footer{
 	width: 98%;
-	height: 30px;
-	line-height: 30px;
+	height: 20px;
+	line-height: 28px;
 	border-top: 1px solid #ddd;
 	position: absolute;
 	bottom: 10px!important;
@@ -222,9 +234,12 @@ img{
 	margin-left: 10px;
 	margin-right: -10px;
 	z-index: 1002;
+	font-size: smaller;
+	color: #666;
 }
 .article-list-footer-info{
 	margin-right: 10px;
+	color: #666;
 }
 .read-more{
 	position: absolute;
@@ -255,6 +270,7 @@ img{
 	line-height: 33px;
 	font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #676a6c;
+    font-size: 12px;
 }
 .article-content img{
 	width: 100%;
@@ -271,6 +287,7 @@ img{
 	position: absolute;
 	right: 0;
 	bottom: 0;
+	font-size: smaller;
 }
 .article-content-comment{
 	position: relative;
@@ -473,10 +490,9 @@ img{
 	color: #383937;
 	font-family: "Helvetica neue",Helvetica,Tahoma,"lantinghei sc","Microsoft Yahei",sans-serif !important;
 }
-.about-contant .desc p{
+.about-contant .desc li{
 	line-height: 24px;
 	margin: 10px 0;
-	text-indent: 24px;
 }
 /*关于结束*/
 
