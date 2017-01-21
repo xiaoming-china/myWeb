@@ -4,56 +4,24 @@ use Think\Controller;
 class IndexController extends Controller {
    //主页
    public function index(){
+      $tree = new \Org\Util\Indefinitely();
       $p      = I('GET.p','1','intval');
       $title  = I('GET.title');
       $type   = I('GET.type');
       $map['title'] = ['like','%'.$title.'%'];
-      
-      //分类显示条件
-      $tree = new \Org\Util\Indefinitely();
-      $tMap['isadmin']     = ['eq',1];
-      $tMap['t_type']      = ['eq',2];
-      $tMap['type_status'] = ['eq',1];
-      //所有分类
-      $typeList = D('HwmAdmin/Type')->Type($tMap,'t_id,type_name,parent');
-
-      //判断当前分类是否有子类,如果有则查询子类及自身，否则查询全部数据
-      if($type != ""){
-        $allChilds =  $tree->getAllChilds($typeList,$type);
-        //判断是否有子级
-        $childsCount = count($allChilds);
-        //echo $childsCount;exit;
-        if($childsCount != 0){
-          $tId = $type.','.implode(",", $allChilds);
-        }else{
-          $tId = $type;
-        }
-        $where['t_id'] = ['in',$tId];
-      }else{
-        $where['t_id'] = ['neq',''];
-      }
-      //获取中间表的文章id
-      $aIds = D('HwmAdmin/ArticleRelation')->getArticleId($where);
-      $aId = '';
-      foreach ($aIds as $key => $value) {
-        $aId .= $value['a_id'].',';
-      }
-      $aId = rtrim($aId,',');
+      //获取分类下所有的文章id
+      $aId = D("HwmAdmin/Article")->getArticleListId($type); 
       //获取文章
       $map['a_id'] = ['in',$aId];
-      //分页
       $count = D('HwmAdmin/Article')->countArticle($map);
       $Page  = new \Think\Page($count,C('page_number'));
       $page_show = $Page->show();
       //文章列表
       $articleList = D('HwmAdmin/Article')->getArticleList($map,$p,C('page_number'));
       //将文章和分类合并
-     foreach ($articleList as $key => $value) {
+      foreach ($articleList as $key => $value) {
        $articleList[$key]['type'] = D('HwmAdmin/ArticleRelation')->getTypeId($value['a_id']);
-     }
-
-     //p($articleList);
-
+      }
       //分类列表
       $this->assign('typeList',$tree->infinite($typeList));
       $this->assign('page_show',$page_show);
