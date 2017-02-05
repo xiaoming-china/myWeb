@@ -38,6 +38,7 @@ class ArticleController extends Controller {
         $aId .= $value['a_id'].',';
       }
       $aId = rtrim($aId,',');
+      var_dump($aId);exit;
       //获取文章
       $map['a_id'] = ['in',$aId];
       //分页

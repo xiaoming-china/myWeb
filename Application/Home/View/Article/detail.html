@@ -137,24 +137,24 @@
 				            <div class="panel panel-default index-right-item">
 							    <div class="panel-heading article-list-title">
 									<h4 class="panel-title article-title">
-									{$aInfo['title']}
+									{$aInfo['info']['title']}
 									</h4>
 									<div class="article-centent-fotter">
 
 								  <span class="article-list-footer-info pull-right">
-								    <i class="icon-comments-alt"></i> {$aInfo['commout_num']}
+								    <i class="icon-comments-alt"></i> {$aInfo['info']['commout_num']}
 								  </span>
 								  <span class="article-list-footer-info pull-right">
-								    <i class="icon-eye-open"></i> {$aInfo['view_num']}
+								    <i class="icon-eye-open"></i> {$aInfo['info']['view_num']}
 								  </span>
 								  <span class="article-list-footer-info pull-right">
 								    <i class="icon-calendar"></i> 
-								    {:date('Y-m-d H:i:s',$aInfo['add_time'])}
+								    {:date('Y-m-d H:i:s',$aInfo['info']['add_time'])}
 								   </span>
 									</div>
 								</div>
 								<div class="panel-body article-content">
-								   <p>{$aInfo['contents']}</p>
+								   <p>{$aInfo['info']['contents']}</p>
 								</div>
 								<!--评论开始-->
 								<div class="hr"></div>
@@ -167,7 +167,6 @@
 									  <div class="add-file">
 									  	<span class="icon-smile file-left emjoy">
 										  <!--表情开始-->
-										  	
 										  <!--表情结束-->
 									  	</span>
 										<!-- <span class="icon-picture pull-left file-left"></span> -->

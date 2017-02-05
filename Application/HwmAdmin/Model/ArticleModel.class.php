@@ -1,6 +1,6 @@
 <?php
 /*
- *会员模型
+ *文章模型
  */
 namespace HwmAdmin\Model;
 use Think\Model\RelationModel;
@@ -37,7 +37,10 @@ class ArticleModel extends RelationModel{
 	 * @return [type]        [description]
 	 */
 	public function getOnlyArticle($where,$field = '*'){
-		return $this->where($where)->field($field)->find();
+
+		$article['info'] = $this->where($where)->field($field)->find();
+		$article['comment'] = D('HwmAdmin/Comment')->GetArticleComment($where['a_id']);
+		return $article;
 	}
 	/**
 	 * [countUser 统计文章]

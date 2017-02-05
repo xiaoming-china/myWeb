@@ -10,7 +10,8 @@ class IndexController extends Controller {
       $type   = I('GET.type');
       $map['title'] = ['like','%'.$title.'%'];
       //获取分类下所有的文章id
-      $aId = D("HwmAdmin/Article")->getArticleListId($type); 
+      $aId = D("HwmAdmin/Article")->getArticleListId($type);
+      
       //获取文章
       $map['a_id'] = ['in',$aId];
       $count = D('HwmAdmin/Article')->countArticle($map);

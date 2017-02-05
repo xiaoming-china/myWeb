@@ -67,17 +67,35 @@ $(document).ready(function(){
         emjoy += '<img src = "/Public/Home/images/emjoy/'+i+'.gif" alt="[emjoy:'+i+']"/>';
        }
        emjoy += '</div>';
-      $(this).after(emjoy);
+      $(this).append(emjoy);
     }  
   });
   //表情点击事件
 $(document).on('click', '.emjoy-box > img', function() {
-  var content  = $(this).parent().parent().siblings('.textarea-box').find('textarea[name="content"]').val();
+  // //var content  = $(this).parent().parent().siblings('.textarea-box').find('textarea[name="content"]').val();
+  var content  = $('textarea[name="content"]').val();
   var addEmjoy = $(this).attr('alt');
   var newVal   = content + addEmjoy;
-  $(this).parent().parent().siblings('.textarea-box').find('textarea[name="content"]').val(newVal);
+  // //$(this).parent().parent().siblings('.textarea-box').find('textarea[name="content"]').val(newVal);
+  $('textarea[name="content"]').val(newVal);
   $('.emjoy-box').remove();//清除全部表情
+  // alert($('.emjoy-box').length);
 });
+//点击表情之外的区域
+// $(document).not($(".emjoy-box")).click(function(){
+//   // alert($('.emjoy-box').length);
+//     if($('.emjoy-box').length > 0){
+//       //alert($('.emjoy-box').length);
+//       $(".emjoy-box").show();
+//     }else{
+//       $(".emjoy-box").hide();
+//     }
+//     /*防止事件冒泡*/
+//     $(".emjoy-box").click(function(event){
+//         // alert('test2中的内容是：'+$("#test2").html());
+//         event.stopPropagation();
+//     })
+//   });
 //相册信息
 $(".photo").on("mousemove", function () {
     var $this = $(this);
