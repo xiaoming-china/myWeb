@@ -62,12 +62,12 @@ $(document).ready(function(){
     $('.emjoy-box').remove();//清除全部表情
     if ($(this).find('.emjoy-box').length <= 0){
        var emjoy = '';
-       emjoy += '<div class="emjoy-box">';
+       emjoy += '<div class="emjoy-box" id="emjoy-box">';
        for (var i = 1; i <= 75; i++) {
-        emjoy += '<img src = "/Public/Home/images/emjoy/'+i+'.gif" alt="[emjoy:'+i+']"/>';
+        emjoy += '<img class="emjoy-img" src = "/Public/Home/images/emjoy/'+i+'.gif" alt="[emjoy:'+i+']"/>';
        }
        emjoy += '</div>';
-      $(this).append(emjoy);
+      $(this).after(emjoy);
     }  
   });
   //表情点击事件
@@ -79,23 +79,15 @@ $(document).on('click', '.emjoy-box > img', function() {
   // //$(this).parent().parent().siblings('.textarea-box').find('textarea[name="content"]').val(newVal);
   $('textarea[name="content"]').val(newVal);
   $('.emjoy-box').remove();//清除全部表情
-  // alert($('.emjoy-box').length);
 });
 //点击表情之外的区域
-// $(document).not($(".emjoy-box")).click(function(){
-//   // alert($('.emjoy-box').length);
-//     if($('.emjoy-box').length > 0){
-//       //alert($('.emjoy-box').length);
-//       $(".emjoy-box").show();
-//     }else{
-//       $(".emjoy-box").hide();
-//     }
-//     /*防止事件冒泡*/
-//     $(".emjoy-box").click(function(event){
-//         // alert('test2中的内容是：'+$("#test2").html());
-//         event.stopPropagation();
-//     })
-//   });
+$("body").click(function(event) {
+  if($('.emjoy-box').length > 0){
+    if (event.target.id != "emjoy-box") {
+        $('.emjoy-box').remove();//清除全部表情
+    }
+  }
+});
 //相册信息
 $(".photo").on("mousemove", function () {
     var $this = $(this);
