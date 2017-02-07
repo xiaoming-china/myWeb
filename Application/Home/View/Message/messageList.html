@@ -41,26 +41,41 @@
                         </span>
                         <!-- <span class="icon-picture pull-left file-left"></span> -->
                         <span class="pull-right">
-                          <button type="button" class="btn btn-info">留言</button>
+                          <button type="button" class="btn btn-info add_message">留言</button>
                         </span>
                       </div>
                     </div>
                 </div>
                 <!--留言主体开始-->
                         <div class="row animated fadeInUp" style="margin: 0px;">
+                        <!--<foreach name="messageList" item="v">-->
                             <div class="col-sm-3">
                                 <div class="message-list">
-                                    <small>深圳市网友</small>
-                                     <p>留言内容留言内容留言内容，留言内容留言内容，留言内容留言内容留言内容留言内容</p>
-                                    <small class="pull-right">data:2017-1-13 11:35</small>
+                                     <small>{:sinaIP($v['u_ip'])}</small>
+                                     <p>{:replaceEmjoy($v['u_message'])}</p>
+                                    <small class="pull-right message-data">
+                                      date:{:date('Y-m-d H:i:s',$v['add_time'])}
+                                    </small>
+                                    <div class="message-reply animated flipInX">
+                                        <small>reply</small>
+                                        <p>
+                                        <!--<if condition="$v['u_reply'] eq ''">-->
+                                          暂未回复
+                                        <!--<else/>-->
+                                          {$v['u_reply']}
+                                        <!--</if>-->
+                                        </p>
+                                        <small class="pull-right reply-date">
+                                          <!--<if condition="$v['u_reply'] neq ''">-->
+                                           date:{:date('Y-m-d H:i:s',$v['reply_time'])}
+                                          <!--</if>-->
+                                        </small>
+                                    </div> 
                                 </div>
-                                
                             </div>
+                        <!--</foreach>-->
                         </div>
-            
-                        
-                        </div>
-                    
+                </div>
                 <!--留言主体结束-->
                 </div>
             </div>
@@ -71,10 +86,24 @@
     <script src="/Public/Admin/js/jquery-1.8.3.min.js"></script>
     <script src="/Public/Admin/js/bootstrap.min.js"></script>
     <script src="/Public/Admin/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="/Public/Admin/assets/layer/layer.js"></script>
     <script src="/Public/Home/js/hwm-basic.js"></script>
-
- 
-
+<script type="text/javascript">
+    $('.add_message').click(function(event) {
+        var content = $('textarea[name="content"]').val();
+        $.post("{:U('Home/Message/addMessage')}", {message: content}, function(rs) {
+            if(rs.status == 'success'){
+                layer.msg(rs.info, {
+                  time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                }, function(){
+                  location.reload();
+                });
+            }else{
+                layer.msg(rs.info);
+            }
+        },'json');
+    });
+</script>
 </body>
 
 </html>

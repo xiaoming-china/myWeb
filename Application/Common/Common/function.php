@@ -366,4 +366,59 @@ function createOrderSN(){
   $order_sn = date('ymdHis',time()).rand(10000,99999);
   return checkRepeatField('order_info','order_sn',$order_sn) ? createOrderSN() : $order_sn;
 }
+/**
+ * [getIPaddress 获取ip地址]
+ * @Author:xiaoming
+ * @DateTime        2017-02-07T15:37:41+0800
+ * @return          [type]                   [description]
+ */
+function getIPaddress(){
+    $IPaddress='';
+    if (isset($_SERVER)){
+        if (isset($_SERVER["HTTP_X_FORWARDED_FOR"])){
+            $IPaddress = $_SERVER["HTTP_X_FORWARDED_FOR"];
+        } else if (isset($_SERVER["HTTP_CLIENT_IP"])) {
+            $IPaddress = $_SERVER["HTTP_CLIENT_IP"];
+        } else {
+            $IPaddress = $_SERVER["REMOTE_ADDR"];
+        }
+    } else {
+        if (getenv("HTTP_X_FORWARDED_FOR")){
+            $IPaddress = getenv("HTTP_X_FORWARDED_FOR");
+        } else if (getenv("HTTP_CLIENT_IP")) {
+            $IPaddress = getenv("HTTP_CLIENT_IP");
+        } else {
+            $IPaddress = getenv("REMOTE_ADDR");
+        }
+    }
+    return $IPaddress;
+}
+/**
+ * [taobaoIP 调用新浪ip地址查询]
+ * @Author:xiaoming
+ * @DateTime        2017-02-07T15:38:27+0800
+ * @param           [type]                   $clientIP [description]
+ * @return          [type]                             [description]
+ */
+function sinaIP($clientIP){
+    $url  = 'http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip='.$clientIP;
+    $rs   = json_decode(file_get_contents($url));
+    if($rs.ret == 1){
+      $data = $rs->province.'省'.$rs->province.'市 的网友';
+    }else{
+      $data = '来自火星的网友';
+    }
+    return $data;
+}
+/**
+ * [replaceEmjoy 表情正则替换]
+ * @Author:xiaoming
+ * @DateTime        2017-02-07T16:49:39+0800
+ * @param           [type]                   $content [description]
+ * @return          [type]                            [description]
+ */
+function replaceEmjoy($content){
+  $rs = preg_replace("/\[emjoy:(\d+)\]/","<img src='/Public/Home/images/emjoy/$1.gif'/>",$content);
+  return $rs;
+}
 

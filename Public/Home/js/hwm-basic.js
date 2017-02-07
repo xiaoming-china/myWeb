@@ -58,7 +58,9 @@ $(document).ready(function(){
     }
   });
   //加载表情
-  $(document).on('click', '.emjoy', function() {
+  $(document).on('click', '.emjoy', function(event) {
+    event.stopPropagation();//阻止冒泡
+    $('.message-reply').hide();//设置回复全部隐藏
     $('.emjoy-box').remove();//清除全部表情
     if ($(this).find('.emjoy-box').length <= 0){
        var emjoy = '';
@@ -72,7 +74,7 @@ $(document).ready(function(){
   });
   //表情点击事件
 $(document).on('click', '.emjoy-box > img', function() {
-  // //var content  = $(this).parent().parent().siblings('.textarea-box').find('textarea[name="content"]').val();
+  //var content  = $(this).parent().parent().siblings('.textarea-box').find('textarea[name="content"]').val();
   var content  = $('textarea[name="content"]').val();
   var addEmjoy = $(this).attr('alt');
   var newVal   = content + addEmjoy;
@@ -81,11 +83,10 @@ $(document).on('click', '.emjoy-box > img', function() {
   $('.emjoy-box').remove();//清除全部表情
 });
 //点击表情之外的区域
-$("body").click(function(event) {
+$(document).click(function(event) {
+  $('.message-reply').hide();//设置回复全部隐藏
   if($('.emjoy-box').length > 0){
-    if (event.target.id != "emjoy-box") {
-        $('.emjoy-box').remove();//清除全部表情
-    }
+    $('.emjoy-box').remove();//清除全部表情
   }
 });
 //相册信息
@@ -95,6 +96,17 @@ $(".photo").on("mousemove", function () {
 }).on("mouseout", function () {
     var $this = $(this);
     $this.find(".photo-info").fadeOut('slow');
+});
+//显示当前留言的回复
+$('.message-list').click(function(event) {
+    event.stopPropagation();//阻止冒泡
+    $('.message-reply').hide();//设置全部隐藏
+    $('.emjoy-box').remove();//清除全部表情
+    $(this).find('.message-reply').show();
+});
+//点击body的时候的操作是全部隐藏
+$(document).click(function(){
+    $('.message-reply').hide();//设置全部隐藏
 });
 
 
