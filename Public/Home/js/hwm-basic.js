@@ -104,6 +104,16 @@ $('.message-list').click(function(event) {
     $('.emjoy-box').remove();//清除全部表情
     $(this).find('.message-reply').show();
 });
+/**
+ * [description关闭留言回复按钮操作]
+ * @Author:xiaoming
+ * @DateTime        2017-02-07T20:56:55+0800
+ * @param           {[type]}                 ){               alert();} [description]
+ * @return          {[type]}                     [description]
+ */
+$(document).on('click', '.close-reply', function() {
+  alert();
+});
 //点击body的时候的操作是全部隐藏
 $(document).click(function(){
     $('.message-reply').hide();//设置全部隐藏

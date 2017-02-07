@@ -16,8 +16,8 @@ class MessageModel extends RelationModel{
 	 * @param           string                   $field    [description]
 	 * @return          [type]                             [description]
 	 */
-	public function getMessageList($where,$field = '*',$page = 1,$pageSize = 20){
-		return $this->where($where)->field($field)->page($page,$pageSize)->select();
+	public function getMessageList($where,$field = '*',$page = 1,$pageSize = 20,$order = 'add_time DESC'){
+		return $this->where($where)->field($field)->page($page,$pageSize)->order($order)->select();
 	}
 	/**
 	 * [addMessage 添加留言数据]

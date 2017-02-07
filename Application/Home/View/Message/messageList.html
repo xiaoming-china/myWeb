@@ -58,6 +58,7 @@
                                     </small>
                                     <div class="message-reply animated flipInX">
                                         <small>reply</small>
+                                        <span class="close-reply pull-right">x</span>
                                         <p>
                                         <!--<if condition="$v['u_reply'] eq ''">-->
                                           暂未回复
@@ -90,18 +91,27 @@
     <script src="/Public/Home/js/hwm-basic.js"></script>
 <script type="text/javascript">
     $('.add_message').click(function(event) {
+
         var content = $('textarea[name="content"]').val();
-        $.post("{:U('Home/Message/addMessage')}", {message: content}, function(rs) {
-            if(rs.status == 'success'){
-                layer.msg(rs.info, {
-                  time: 1000 //1秒关闭（如果不配置，默认是3秒）
-                }, function(){
-                  location.reload();
-                });
-            }else{
-                layer.msg(rs.info);
-            }
-        },'json');
+        if(content == ''){
+          layer.msg('留言内容不能为空', {
+            time: 1000 //1秒关闭（如果不配置，默认是3秒）
+          });
+        }else{
+          $(this).html('正在加载。。。');
+          $.post("{:U('Home/Message/addMessage')}", {message: content}, function(rs) {
+                if(rs.status == 'success'){
+                    layer.msg(rs.info, {
+                      time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                    }, function(){
+                      location.reload();
+                    });
+                }else{
+                    layer.msg(rs.info);
+                }
+            },'json');
+        }
+
     });
 </script>
 </body>

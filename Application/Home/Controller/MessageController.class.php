@@ -11,7 +11,6 @@ class MessageController extends Controller {
    public function messageList(){
    	  $where['is_show'] = ['eq',1];
       $rs = D('HwmAdmin/Message')->getMessageList($where);
-      // var_dump($rs);
       $this->assign('messageList',$rs);
       $this->display();
    }
@@ -21,15 +20,12 @@ class MessageController extends Controller {
     * @DateTime        2017-02-07T15:48:37+0800
     */
    public function addMessage(){
-   
-   	$message = I('POST.message') OR fail('留言内容不能为空');
-   	// $t = preg_replace("/\[emjoy:(\d+)\]/","<img src='http://127.0.0.1/face/$1.gif'/>",$message);
-   	// var_dump($t);exit;
-   	$d['u_message'] = $message;
-   	$d['u_ip']      = getIPaddress();
-   	$d['add_time']  = time();
-   	$rs = D('HwmAdmin/Message')->addMessage($d);
-   	$rs ? success('添加成功') : fail('添加失败，未知错误');
+     	$message = I('POST.message') OR fail('留言内容不能为空');
+     	$d['u_message'] = $message;
+     	$d['u_ip']      = getIPaddress();
+     	$d['add_time']  = time();
+     	$rs = D('HwmAdmin/Message')->addMessage($d);
+     	$rs ? success('添加成功') : fail('添加失败，未知错误');
    }
 
 
