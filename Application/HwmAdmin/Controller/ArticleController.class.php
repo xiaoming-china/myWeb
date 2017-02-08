@@ -81,7 +81,7 @@ class ArticleController extends AdminBasicController {
       $a['keyword']     = I('POST.keyword');
       $a['tag']         = I('POST.tags');
       $a['desc']        = I('POST.desc') OR fail('描述不能为空');
-      $a['thumb_img']   = I('POST.article_thumb');
+      $a['covour']      = I('POST.article_thumb');
       $a['status']      = I('POST.status') OR fail('状态不能为空');
       $a['contents']    = I('POST.articleContent') OR fail('内容不能为空');
       $a['add_time']    = time();
