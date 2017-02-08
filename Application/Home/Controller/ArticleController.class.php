@@ -68,10 +68,25 @@ class ArticleController extends Controller {
     $id          = I('GET.aId','','intval');
     $map['a_id'] = $id;
     $rs          = D('HwmAdmin/Article')->getOnlyArticle($map);
-    // var_dump($rs);
+    $rs['comment'] = D('HwmAdmin/Comment')->GetArticleComment($id);
+    // p($rs);
     $this->assign('aInfo',$rs);
     $this->display();
-
+   }
+   /**
+    * [addComment 添加文章评论]
+    * @Author:xiaoming
+    * @DateTime        2017-02-08T11:39:40+0800
+    */
+   public function addComment(){
+      $d['article_id'] = I('POST.aId','','intval');
+      $d['f_id']       = I('POST.content');
+      $d['t_id']       = I('POST.content');
+      $d['content']    = I('POST.content');
+      $d['partent_id'] = 0;
+      $d['add_time']   = time();
+      $rs = D('HwmAdmin/Comment')->addComment($d);
+      $rs ? success('评论成功') : fail('评论失败，未知错误');
    }
 
        

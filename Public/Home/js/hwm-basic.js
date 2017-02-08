@@ -118,6 +118,56 @@ $(document).on('click', '.close-reply', function() {
 $(document).click(function(){
     $('.message-reply').hide();//设置全部隐藏
 });
+/**
+ * [description 添加留言]
+ * @Author:xiaoming
+ * @DateTime        2017-02-08T08:45:47+0800
+ * @param           {[type]}                 event) {               var content [description]
+ * @return          {[type]}                        [description]
+ */
+$('.add_message').click(function(event) {
+    var content = $('textarea[name="content"]').val();
+    if(content == ''){
+      layer.msg('留言内容不能为空', {
+        time: 1000 //1秒关闭（如果不配置，默认是3秒）
+      });
+    }else{
+      $(this).html('正在加载。。。');
+      $.post(url, {message: content}, function(rs) {
+            if(rs.status == 'success'){
+                layer.msg(rs.info, {
+                  time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                }, function(){
+                  location.reload();
+                });
+            }else{
+                layer.msg(rs.info);
+            }
+        },'json');
+    }
+});
+//评论文章
+$(document).on('click','.comment-add',function(event) {
+    var content = $('textarea[name="content"]').val();
+    if(content == ''){
+      layer.msg('评论内容不能为空', {
+        time: 1000 //1秒关闭（如果不配置，默认是3秒）
+      });
+    }else{
+      $(this).html('正在加载。。。');
+      $.post(url, {content: content,aId:aId}, function(rs) {
+            if(rs.status == 'success'){
+                layer.msg(rs.info, {
+                  time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                }, function(){
+                  location.reload();
+                });
+            }else{
+                layer.msg(rs.info);
+            }
+        },'json');
+    }
+});
 
 
 

@@ -171,92 +171,73 @@
 									  	</span>
 										<!-- <span class="icon-picture pull-left file-left"></span> -->
 										<span class="pull-right">
-										  <button type="button" class="btn btn-info">评论</button>
+										  <button type="button" class="btn btn-info comment-add">
+										  评论
+										  </button>
 										</span>
 									  </div>
-									  
 									</div>
 									<div class="clearfix"></div>
 									<div class="comment-main-box">
+									<!--<foreach name="aInfo['comment']" item="v">-->
 										<div class="comment-box">
 											<div class="comment-user">
 											  <div class="user-photo">
 											  	<img src="/Public/Admin/img/follower-avatar.jpg">
 											  </div>
 											  <div class="user-name">
-											  	<p class="name">她们都叫我小明</p>
-											  	<p class="data">1分钟前</p>
+											  	<p class="name">
+											  	{:sinaIP($v['f_id'])}
+											  	</p>
+											  	<p class="data">{:formatTime($v['add_time'])}
+											  	</p>
 											  </div>
 											</div>
-											<div class="comment-info">可是不引入BOOTSTRAP，却是正常显示因为使用的BOOTSTRAP，使用htmlspecialchars_decode对文章进行显示的时候，段落首行只缩进两个空格（一个中文字符）</div>
-											<div class="pull-right comment-fotter">
-												<!-- <span class="article-reply">回复</span> -->
+											<div class="comment-info">{:replaceEmjoy($v['content'])}
+											</div>
+											<!-- <div class="pull-right comment-fotter">
+												<span class="article-reply">回复</span>
 												<span class="icon-thumbs-up"> 100</span>
 												<span class="icon-thumbs-down"> 83</span>
-											</div>
-							<!--回复开始-->
+											</div> -->
+											
+							            <!--回复开始-->
+							            <!--<notempty name="v['reply']">-->
+							            <!--<foreach name = "v['reply']" item="r">-->
 											<div class="comment-reply-box">
 												<div class="comment-user">
-											  <div class="user-photo">
-											  	<img src="/Public/Admin/img/follower-avatar.jpg">
-											  </div>
-											  <div class="user-name">
-											  	<p class="name">管理员</p>
-											  	<p class="data">1分钟前</p>
-											  </div>
+												  <div class="user-photo">
+												  	<img src="/Public/Admin/img/follower-avatar.jpg">
+												  </div>
+												  <div class="user-name">
+												  	<p class="name">
+												  	<span class="reply-user">
+												  	 {:sinaIP($v['f_id'])}
+												  	</span> 
+												  	回复了
+												  	<span class="reply-user">
+												  	  {:sinaIP($v['t_id'])}
+												  	</span> 
+												  	</p>
+												  	<p class="data">1分钟前</p>
+												  </div>
+												</div>
+											    <div class="comment-info">
+											       {:replaceEmjoy($v['content'])}
+											    </div>
 											</div>
-											<div class="comment-info">可是不引入BOOTSTRAP，却是正常显示因为使用的BOOTSTRAP，使用htmlspecialchars_decode对文章进行显示的时候，段落首行只缩进两个空格（一个中文字符）</div>
-											</div>
+										<!--</foreach>-->
+										<!--</notempty>-->
 											<!--回复结束-->
-
 											<!--回复框-->
-
 											<!--回复框-->
-
 										</div>
 										<div class="hr"></div>
-										<div class="comment-box">
-											<div class="comment-user">
-											  <div class="user-photo">
-											  	<img src="/Public/Admin/img/follower-avatar.jpg">
-											  </div>
-											  <div class="user-name">
-											  	<p class="name">她们都叫我小明</p>
-											  	<p class="data">1分钟前</p>
-											  </div>
-											</div>
-											<div class="comment-info">可是不引入BOOTSTRAP，却是正常显示因为使用的BOOTSTRAP，使用htmlspecialchars_decode对文章进行显示的时候，段落首行只缩进两个空格（一个中文字符）</div>
-											<div class="pull-right comment-fotter">
-												<!-- <span class="article-reply">回复</span> -->
-												<span class="icon-thumbs-up"> 100</span>
-												<span class="icon-thumbs-down"> 83</span>
-											</div>
-										</div>
-										<div class="hr"></div>
-										<div class="comment-box">
-											<div class="comment-user">
-											  <div class="user-photo">
-											  	<img src="/Public/Admin/img/follower-avatar.jpg">
-											  </div>
-											  <div class="user-name">
-											  	<p class="name">她们都叫我小明</p>
-											  	<p class="data">1分钟前</p>
-											  </div>
-											</div>
-											<div class="comment-info">可是不引入BOOTSTRAP，却是正常显示因为使用的BOOTSTRAP，使用htmlspecialchars_decode对文章进行显示的时候，段落首行只缩进两个空格（一个中文字符）</div>
-											<div class="pull-right comment-fotter">
-												<!-- <span class="article-reply">回复</span> -->
-												<span class="icon-thumbs-up"> 100</span>
-												<span class="icon-thumbs-down"> 83</span>
-											</div>
-										</div>
-										<div class="hr"></div>
+									<!--</foreach>-->
 									</div>
 							    </div>
 							    <!--评论结束-->
 							</div>
-							
-						
 				        </div>
 				    </div>
     			</div>
@@ -270,17 +251,13 @@
     <script src="/Public/Admin/js/jquery.js"></script>
     <script src="/Public/Admin/js/jquery-1.8.3.min.js"></script>
     <script src="/Public/Admin/js/bootstrap.min.js"></script>
-    <script src="/Public/Admin/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="/Public/Admin/js/jquery.nicescroll.js"></script>
+    <script src="/Public/Admin/assets/layer/layer.js"></script>
  	<script src="/Public/Home/js/hwm-basic.js"></script>
-  
-
     <script type="text/javascript">
-    
+    	var url = "{:U('Article/addComment')}";
+    	var aId = {$_GET['aId']};
     </script>
-    
-    
-          
-
 
 <div class="container-fluid index-fotter visible-lg">
 	Copyright © 2013-2016 意随心  myWeb.com All Rights Reserved. 备案号：闽ICP备15012807号-1

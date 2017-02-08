@@ -89,31 +89,9 @@
     <script src="/Public/Admin/js/jquery.nicescroll.js" type="text/javascript"></script>
     <script src="/Public/Admin/assets/layer/layer.js"></script>
     <script src="/Public/Home/js/hwm-basic.js"></script>
-<script type="text/javascript">
-    $('.add_message').click(function(event) {
-
-        var content = $('textarea[name="content"]').val();
-        if(content == ''){
-          layer.msg('留言内容不能为空', {
-            time: 1000 //1秒关闭（如果不配置，默认是3秒）
-          });
-        }else{
-          $(this).html('正在加载。。。');
-          $.post("{:U('Home/Message/addMessage')}", {message: content}, function(rs) {
-                if(rs.status == 'success'){
-                    layer.msg(rs.info, {
-                      time: 1000 //1秒关闭（如果不配置，默认是3秒）
-                    }, function(){
-                      location.reload();
-                    });
-                }else{
-                    layer.msg(rs.info);
-                }
-            },'json');
-        }
-
-    });
-</script>
+    <script type="text/javascript">
+        var url = "{:U('Home/Message/addMessage')}";//url参数
+    </script>
 </body>
 
 </html>
