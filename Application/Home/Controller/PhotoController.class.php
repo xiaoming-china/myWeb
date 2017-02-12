@@ -41,6 +41,10 @@ class PhotoController extends Controller {
 	   	}else{
 	   		$data  = D('HwmAdmin/PhoneType')->photoList($pId);
 	   	}
+	   	//更新相册点击数
+	   	$where['p_id']  = ['eq',$pId];
+	   	$d['p_view'] = $rs['p_view'] + 1;
+	   	$view = D('HwmAdmin/PhoneType')->editPhone($where,$d);
 	   	return_json($data);
 	}
 	/**

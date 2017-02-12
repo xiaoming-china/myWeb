@@ -88,6 +88,22 @@ class ArticleController extends Controller {
       $rs = D('HwmAdmin/Comment')->addComment($d);
       $rs ? success('评论成功') : fail('评论失败，未知错误');
    }
+   /**
+    * [countView 增加文章点击数]
+    * @Author:xiaoming
+    * @DateTime        2017-02-11T17:57:48+0800
+    * @return          [type]                   [description]
+    */
+   public function countView(){
+    $aId = I('POST.aId','','intval');
+    $map['a_id'] = $aId;
+    $rs          = D('HwmAdmin/Article')->getOnlyArticle($map);
+    $data['view_num'] = $rs['info']['view_num'] + 1;
+    $result = D('HwmAdmin/Article')->editArticle($map,$data);
+    if(!$result){
+      exit('数据错误');
+    }
+   }
 
        
 

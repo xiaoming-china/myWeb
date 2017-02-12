@@ -257,6 +257,8 @@
     <script type="text/javascript">
     	var url = "{:U('Article/addComment')}";
     	var aId = {$_GET['aId']};
+    	//更新文章点击数
+    	$.post("{:U('Article/countView')}",{aId:aId},function(rs){});
     </script>
 
 <div class="container-fluid index-fotter visible-lg">
