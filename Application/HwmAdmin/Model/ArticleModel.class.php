@@ -74,7 +74,7 @@ class ArticleModel extends RelationModel{
 	 * @DateTime        2017-01-21T15:44:26+0800
 	 * @return          [type]                   [description]
 	 */
-	public function getArticleListId($tId){
+	public function getArticleListId($type){
 		  //分类显示条件
 	      $tree = new \Org\Util\Indefinitely();
 	      $tMap['isadmin']     = ['eq',1];
@@ -82,6 +82,7 @@ class ArticleModel extends RelationModel{
 	      $tMap['type_status'] = ['eq',1];
 	      //所有分类
 	      $typeList = D('HwmAdmin/Type')->Type($tMap,'t_id,type_name,parent');
+	      
 		  //判断当前分类是否有子类,如果有则查询子类及自身，否则查询全部数据
 	      if($type != ""){
 	        $allChilds =  $tree->getAllChilds($typeList,$type);

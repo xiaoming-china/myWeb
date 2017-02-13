@@ -1,0 +1,15 @@
+<div class="panel panel-default index-left-item visible-lg">
+    <div class="panel-heading hot-heading">
+        <h3 class="panel-title list-title">热门内容</h3>
+    </div>
+    <div class="panel-body hot-list">
+    <!--<foreach name="hotList" item = "v">-->
+      <p>
+        <a href="{:U('Article/detail',array('aId'=>$v['a_id']))}" class="">
+          <span>{$key+1}</span>
+          {$v['title']}
+        </a>
+      </p>
+    <!--</foreach>-->
+    </div>
+</div>
