@@ -17,7 +17,6 @@ class PublicWidget extends Controller {
     	$where['is_hot'] = ['eq',1];
     	$where['status'] = ['eq',1];
     	$list = D('HwmAdmin/Article')->getArticleList($where,0,$pageSize ,$field = 'a_id,title');
-    	// var_dump($list);
     	$this->assign('hotList',$list);
     	$this->display('Widget/HotList/hotList');
     }
@@ -32,4 +31,30 @@ class PublicWidget extends Controller {
         
         $this->display('Widget/LabelList/labelList');
     }
+     /**
+     * [labelList 前台导航数据列表显示]
+     * @Author:xiaoming
+     * @DateTime        2017-02-13T22:36:32+0800
+     * @param           [type]                   $num [标签数量]
+     * @return          [type]                        [description]
+     */
+    public function sidebar(){
+        $where['ishome']  = ['eq',1];
+        $where['parent']  = ['eq',0];
+        $navList = D('HwmAdmin/Type')->Type($where);
+        // var_dump($navList);
+        $this->assign('navList',$navList);
+        $this->display('Widget/Sidebar/Sidebar');
+    }
+    /**
+     * [left 前台页面左边二级导航]
+     * @Author:xiaoming
+     * @DateTime        2017-02-20T15:49:18+0800
+     * @return          [type]                   [description]
+     */
+    public function left(){
+        
+    }
+
+
 }

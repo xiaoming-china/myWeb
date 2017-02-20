@@ -48,7 +48,6 @@ class TypeModel extends RelationModel{
 	 */
 	public function delType($where){
 		 return $this->where($where)->delete() ? true : false;
-		 echo $this->getlastsql();
 	}
 
 
