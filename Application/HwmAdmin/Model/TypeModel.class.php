@@ -12,8 +12,8 @@ class TypeModel extends RelationModel{
 	 * @param  string $field [description]
 	 * @return [type]        [description]
 	 */
-	public function Type($where,$field='*'){
-		return $this->where($where)->field($field)->select();
+	public function Type($where,$field='*',$order ='type_sort DESC'){
+		return $this->where($where)->field($field)->order($order)->select();
 	}
 	/**
 	 * [getOnlyType 获取单条类型]

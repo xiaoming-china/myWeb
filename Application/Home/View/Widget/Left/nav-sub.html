@@ -1,0 +1,37 @@
+<!-- <h1 class="animated bounceOut">Animate.css</h1> -->
+    <div class="panel panel-default index-left-item visible-lg" id="navbar-wrapper" style="border: none;">
+	    <div class="panel-body">
+	      <div class="search-box">
+	        <div class="search">
+	        	 <label><input type="text" name="keyword"></label>
+	        </div>
+	      </div>
+			<div class="type-list">
+				   <div>
+		        	<a href="#" class="item-list on">
+		        		<div class="pull-left">
+		        		  全部
+		        		</div>
+		        	</a>
+		        	</div>
+	        	<!--列表开始-->
+	        <!--<foreach name="sub" item="v">-->
+	        	<div>
+	        		<span class="item-list-partent">+</span>
+		        	<a href="{:U($v[url],array('type'=>$v['t_id']))}" class="item-list">
+		        		<div class="pull-left">
+		        		  {$v['type_name']}
+		        		</div>
+		        	</a>
+		        <!--<foreach name="v['child']" item="r">-->
+		        	<div class="item-list-sub">
+		        		<a href="{:U($r[url],array('type'=>$v['t_id']))}">
+		        		  {$r['type_name']}
+		        		</a>
+		        	</div>
+		        <!--</foreach>-->
+	        	</div>
+	        <!--</foreach>-->
+	        </div> 
+	    </div>
+	</div>

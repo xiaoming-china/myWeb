@@ -1,46 +1,7 @@
 <div class="col-md-4 test" id="index-left">
-<!-- <h1 class="animated bounceOut">Animate.css</h1> -->
-    <div class="panel panel-default index-left-item visible-lg" id="navbar-wrapper" style="border: none;">
-	    <div class="panel-body">
-	      <div class="search-box">
-	        <div class="search">
-	        	 <label><input type="text" name="keyword"></label>
-	        </div>
-	      </div>
-			<div class="type-list">
-	        	<!--列表开始-->
-	        	<div>
-		        	<a href="#" class="item-list on">
-		        		<div class="item-list-partent">后端</div>
-		        	</a>
-		        	<div class="item-list-sub">
-		        		<a href="">php</a>
-		        		<a href="">java</a>
-		        	</div>
-	        	</div>
-	        	<div>
-		        	<a href="#" class="item-list">
-		        		<div class="item-list-partent">前端</div>
-		        	</a>
-		        	<div class="item-list-sub">
-		        		<a href="">css</a>
-		        		<a href="">html</a>
-		        		<a href="">js</a>
-		        	</div>
-	        	</div>
-	        	<div>
-		        	<a href="#" class="item-list">
-		        		<div class="item-list-partent">其它</div>
-		        	</a>
-		        	<div class="item-list-sub">
-		        		<a href="">c</a>
-		        		<a href="">c#</a>
-		        		<a href="">c++</a>
-		        	</div>
-	        	</div>
-	        </div> 
-	    </div>
-	</div>
+	<!--二级导航开始-->
+	  {:W('Public/left')} 
+	<!--二级导航结束-->
 	<!--热门内容开始-->
 	  {:W('Public/hotList',array(5))} 
 	<!--热门内容结束-->

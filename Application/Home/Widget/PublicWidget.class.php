@@ -53,7 +53,17 @@ class PublicWidget extends Controller {
      * @return          [type]                   [description]
      */
     public function left(){
-        
+        $type = I('GET.type','','intval');
+        $tree = new \Org\Util\Indefinitely();//无限级类
+        $tMap['t_type']      = ['eq',2];
+        $tMap['type_status'] = ['eq',1];
+        //所有分类
+        $typeList = D('HwmAdmin/Type')->Type($tMap,'t_id,type_name,parent');
+        //所有的二级导航
+        $sub =  $tree->manyArray($typeList,$type);
+        // var_dump($sub);
+        $this->assign('sub',$sub);
+        $this->display('Widget/Left/nav-sub');
     }
 
 
