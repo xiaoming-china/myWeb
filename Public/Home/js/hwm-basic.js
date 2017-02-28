@@ -1,16 +1,15 @@
 $(document).ready(function(){
   //分类控制
   $(".item-list-partent").click(function(){
-    $(".item-list-partent").text('+');
     if($(this).text() == '+'){
       $(this).text('-');
     }else{
       $(this).text('+');
     }
   	$('.item-list-sub').hide(400);//先全部隐藏
-    $(this).parent('.item-list').siblings('.item-list-sub').toggle(500);//再打开子级元素
+    $(this).siblings('.item-list-sub').toggle();//再打开子级元素
     $('.item-list').removeClass('on');
-    $(this).parent('.item-list').fadeIn("fast").addClass('on');
+    $(this).parent('div').fadeIn("fast").addClass('on');
   });
   //配置滚动条插件
      $("html").niceScroll({
